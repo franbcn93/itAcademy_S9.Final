@@ -1,0 +1,13 @@
+p {
+  color: white;
+  padding-top: 7px;
+}
+
+li button {
+  color: white;
+}
+
+.navbar-brand,
+.btn-link {
+  font-size: 30px !important;
+}

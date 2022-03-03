@@ -1,0 +1,13 @@
+<p>weather works!</p>
+<button (click)="getWeatherBcn()">getWeather</button>
+<div *ngIf="allFields != undefined" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p> Weather in {{allFields.name}} </p>
+            <p>Latitude: {{allFields.coord.lat}}; Longitude: {{allFields.coord.lon}}</p>
+            <p>Temperature: {{temp}} ° C. Màx: {{max}} ° C / Min {{min}} ° C </p>
+            <p>Humidity: {{allFields.main.humidity}} %</p>
+            <p>Description: {{allFields.weather[0].description}}</p>
+        </div>
+    </div>
+</div>
