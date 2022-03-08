@@ -1,10 +1,14 @@
+<p>stations works!</p>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <p>Get the weather of the Barcelona city: 
-                <button class="btn btn-primary" (click)="getWeatherBcn()">getWeather</button>
+            <!-- <input type="number" [ngModel]="lado"> -->
+            <label for="">Find by station Id: </label><input type="number" #id>
+            <select ng-model="selectedName">{{arrayNames}}</select>
+            <p>Get stations of the Barcelona city: 
+                <button class="btn btn-primary" (click)="getStationsBcn(id.value)">getStations</button>
             </p>  
-            <div *ngIf="allFields != undefined" class="card" style="width: 32rem;">
+            <!-- <div *ngIf="allFields != undefined" class="card" style="width: 32rem;">
                 <div class="card-body">
                   <h5 class="card-title">Weather in {{allFields.name}}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Description: {{allFields.weather[0].description}}</h6>
@@ -12,7 +16,7 @@
                   <p class="card-text">Temperature: {{temp}}° C. Max: {{max}}° C / Min {{min}}° C </p>
                   <p class="card-text">Humidity: {{allFields.main.humidity}} %</p>
                 </div>
-              </div>
+              </div> -->
         </div>
     </div>
 </div>

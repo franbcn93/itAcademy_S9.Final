@@ -4,11 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { InstruccionsComponent } from './instruccions/instruccions.component';
 import { ContactComponent } from './contact/contact.component';
 import { HttpClientModule } from "@angular/common/http";
 import { WeatherComponent } from './weather/weather.component';
-import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PopLoginComponent } from './pop-login/pop-login.component';
@@ -24,10 +22,14 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 // import { AngularFireModule } from '@angular/fire';
 // import { AngularFirestore } from '@angular/fire/firestore';
+import { LoginAndSignupService } from './login-and-signup.service';
+import { HomeChildComponent } from './home-child/home-child.component';
+import { StationsComponent } from './stations/stations.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes=[
   {path: '', component:HomeComponent},
-  {path: 'instruccions', component:InstruccionsComponent},
+  {path: 'stations', component:StationsComponent},
   {path: 'contact', component:ContactComponent},
   // {path: 'login', component:LoginComponent},
   // {path: 'register', component:RegisterComponent}
@@ -37,13 +39,12 @@ const routes: Routes=[
   declarations: [
     AppComponent,
     HomeComponent,
-    InstruccionsComponent,
     ContactComponent,
     WeatherComponent,
-    LoginComponent,
     RegisterComponent,
     PopLoginComponent,
-    PopSignInComponent
+    PopSignInComponent,
+    HomeChildComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,10 +52,12 @@ const routes: Routes=[
     HttpClientModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
+    FormsModule,
+    ReactiveFormsModule,
     // provideFirebaseApp(() => initializeApp(environment.firebase)),
     // provideFirestore(() => getFirestore())
   ],
-  providers: [AngularFirestoreModule],
+  providers: [AngularFirestoreModule, AppComponent],
   bootstrap: [AppComponent]
   
 })

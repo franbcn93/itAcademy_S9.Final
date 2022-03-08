@@ -1,16 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Firestore, collectionData, collection, provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { provideFirebaseApp } from '@angular/fire/app';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-  AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
-
-
+import { AngularFirestore} from '@angular/fire/compat/firestore';
+import { LoginAndSignupService } from '../login-and-signup.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-pop-login',
@@ -33,11 +25,6 @@ import {
               <button type="button" class="btn btn-outline-warning" 
               (click)="activeModal.close('Close click')" (click)="grabar_user_logIn()">Log In</button>
             </div>
-            <!-- <ul>
-              <li *ngFor="let item of item$ | async">
-                {{ item.name }}
-              </li>
-            </ul> -->
           `,
   styleUrls: ['./pop-login.component.css']
 })
@@ -48,13 +35,10 @@ export class PopLoginComponent implements OnInit {
   @Input() text_2: any;
   @Input() username:string = "";
   @Input() password:string = "";
-  arrayLogs: LogIn[]= [];
-  // items: Observable<Item[]>;
-
-  // private itemCollection:AngularFirestoreCollection<Item>;
   
-  constructor(public activeModal: NgbActiveModal, public afs: AngularFirestore) {
-    this.get_users(); 
+  constructor(public activeModal: NgbActiveModal, public afs: AngularFirestore, 
+    public loginService: LoginAndSignupService, public appC: AppComponent) {
+    // this.get_users(); 
    }
 
   ngOnInit(): void {
@@ -69,38 +53,13 @@ export class PopLoginComponent implements OnInit {
   }
 
   grabar_user_logIn(){
-    let newLogin:LogIn;
-    newLogin={username: this.username, password:this.password}
-    console.log(this.afs.collection("logins").add(newLogin));
-    console.log(this.afs.collection("logins"))
-    this.afs.collection("logins").snapshotChanges().subscribe(val => console.log(val))
-    
-    
-  }
-  
-  get_users(){
-    // console.log(this.afs.doc("logins/8icNOPDIwkkOk7bgxQOP").get().subscribe(val => {
-    //   const doc = val.data();
-    //   console.log(doc);
-      
-    // }))
-    let userDoc = this.afs.firestore.collection("logins");
-    userDoc.get().then((querySnapshot) => { 
-      querySnapshot.forEach((doc) => {
-           console.log(doc.id, "=>", doc.data(), doc.data().username);
-      })
-   })
-
-  }
+    this.loginService.queryregister(this.username, this.password);
+    setTimeout(() => { 
+      this.appC.registerName(this.loginService.name);
+      console.log(this.loginService.name);   
+    }, 2500);
+  }  
 }
 
-interface LogIn{
-   username:string;
-   password:string;
 
-  // constructor(username:string, password:string){
-  //   this.username = username;
-  //   this.password = password;
-  // }
-}
 

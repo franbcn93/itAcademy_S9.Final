@@ -16,6 +16,8 @@ export class WeatherComponent implements OnInit {
   temp:number=0;
   max: number = 0;
   min: number = 0;
+  lista:string[]=["hola","que","tal", "estas"];
+  seleccionado:string[]=[];
 
   constructor(private weatherService: WeatherTaskService) { }
 

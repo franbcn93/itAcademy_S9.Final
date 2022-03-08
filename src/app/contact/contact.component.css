@@ -1,18 +1,13 @@
 .center {
   position: absolute;
-  /* width: 100px;
-  height: 50px; */
-  top: 50%;
-  /* left: 8%; */
-  /* margin-left: -50px; 
-  margin-top: -25px; */
+  top: 40%;
 }
 
 img {
   width: 200px;
   height: 250px;
   position: absolute;
-  top: -50%;
+  top: -30%;
   margin-left: 10%;
 }
 

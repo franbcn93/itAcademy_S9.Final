@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFirestore} from '@angular/fire/compat/firestore';
+import { LoginAndSignupService } from '../login-and-signup.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-pop-sign-in',
@@ -13,7 +16,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
             </div>
             <div class="modal-body_2">
             <label for="">Username: </label>
-              <input type="text" placeholder={{text}} (change)="setUsername($event)">
+              <input type="text" placeholder={{text}} (change)="setUsername($event)" #newItem>
               <br>
               <label class="labelEmail" for="">Email: </label>
               <input type="text" placeholder={{text_2}} (change)="setEmail($event)">
@@ -23,7 +26,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-warning" 
-              (click)="activeModal.close('Close click')" (click)="grabar_user_signUp()">Sign Up</button>
+              (click)="activeModal.close('Close click')" (click)="grabar_user_signUp()"
+              >Sign Up</button>
             </div>
           `,
   styleUrls: ['./pop-sign-in.component.css']
@@ -37,9 +41,13 @@ export class PopSignInComponent implements OnInit {
   @Input() username:string = "";
   @Input() email:string = "";
   @Input() password:string = "";
-  arraySign:SignUp[] = [];
+  
+  // arraySign:SignUp[] = [];
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal, public afs: AngularFirestore, 
+    public SignS: LoginAndSignupService, public appC: AppComponent) {
+      // this.get_users_signUp();
+     }
 
   ngOnInit(): void {
   }
@@ -56,22 +64,20 @@ export class PopSignInComponent implements OnInit {
     this.password = event.target.value;
   }
 
-  grabar_user_signUp(){
-    let data = new SignUp(this.username, this.email, this.password);
-    this.arraySign.push(data);
-    console.log(this.arraySign);
-    // this.service.setSignUp(this.username, this.email, this.password);
+  grabar_user_signUp(){ 
+    if(this.username === "" || this.email === "" || this.password === ""){
+      alert("Can't be empty fields.")
+    }else{
+      this.SignS.register(this.username, this.email, this.password);
+      setTimeout(() => { 
+        this.appC.registerName(this.SignS.name);
+        console.log(this.SignS.name);   
+      }, 1000);
+    }
   }
+
+  // get_users_signUp(){
+  //   this.SignS.getSignUp();
+  // }
 }
 
-export class SignUp{
-  private username:string;
-  private email:string;
-  private password:string;
-
-  constructor(username:string, email:string, password:string){
-    this.username = username;
-    this.email = email;
-    this.password = password;
-  }
-}

@@ -1,2 +1,11 @@
-<p>home works!</p>
-<app-weather></app-weather>
+
+<div class="parent">
+    <div class="child">
+        <p>There are endless ways to greet you...</p>
+        <ul>
+            <li *ngFor="let item of items">{{item}}</li>
+        </ul>
+        <app-home-child (newItemEvent)="addItem($event)"></app-home-child>
+        <app-weather></app-weather>
+    </div>
+</div>

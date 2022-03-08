@@ -11,3 +11,17 @@ li button {
 .btn-link {
   font-size: 30px !important;
 }
+
+.auth {
+  color: red;
+  margin: 0px 30px;
+}
+
+.notAuth {
+  margin: 10px 30px;
+}
+
+.notAuth,
+.auth {
+  font-size: 20px;
+}

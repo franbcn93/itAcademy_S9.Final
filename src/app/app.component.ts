@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject } from 'rxjs';
 import { PopLoginComponent } from './pop-login/pop-login.component';
 import { PopSignInComponent } from './pop-sign-in/pop-sign-in.component';
+import { LoginAndSignupService } from './login-and-signup.service';
 
 
 @Component({
@@ -12,16 +14,25 @@ import { PopSignInComponent } from './pop-sign-in/pop-sign-in.component';
 })
 export class AppComponent {
   title = 'final';
-
-  constructor(private modal: NgbModal) {
+  admin: string = "Admin";
+  notAdmin: string = "Not_Admin"
+  
+  constructor(private modal: NgbModal, public loginService: LoginAndSignupService) {
     
-   }
+  }
+  public isAuth$ = this.loginService.isAuth$;
+  public register$ = this.loginService.register$;
+
+   ngOnInit(): void {
+  }
+
 
   login(){
     const modalRef = this.modal.open(PopLoginComponent);
     modalRef.componentInstance.title = 'Log In';
     modalRef.componentInstance.text = "Username or Email Address";
     modalRef.componentInstance.text_2 = "Password";
+
   }
 
   register(){
@@ -30,5 +41,10 @@ export class AppComponent {
     modalRef.componentInstance.text = "Username";
     modalRef.componentInstance.text_2 = "Email Address";
     modalRef.componentInstance.text_3 = "Password";
+  }
+
+  registerName(nameRegistered:string){
+    this.admin = nameRegistered;
+    console.log(this.admin);
   }
 }
