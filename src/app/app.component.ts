@@ -5,6 +5,8 @@ import { BehaviorSubject } from 'rxjs';
 import { PopLoginComponent } from './pop-login/pop-login.component';
 import { PopSignInComponent } from './pop-sign-in/pop-sign-in.component';
 import { LoginAndSignupService } from './login-and-signup.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
@@ -17,13 +19,15 @@ export class AppComponent {
   admin: string = "Admin";
   notAdmin: string = "Not_Admin"
   
-  constructor(private modal: NgbModal, public loginService: LoginAndSignupService) {
+  constructor(private modal: NgbModal, public loginService: LoginAndSignupService, 
+    public fb: FormBuilder) {
     
   }
   public isAuth$ = this.loginService.isAuth$;
   public register$ = this.loginService.register$;
 
    ngOnInit(): void {
+    
   }
 
 

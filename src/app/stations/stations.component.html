@@ -1,22 +1,56 @@
-<p>stations works!</p>
 <div class="container">
-    <div class="row">
+    <div class="row textCenter">
         <div class="col-md-12">
-            <!-- <input type="number" [ngModel]="lado"> -->
-            <label for="">Find by station Id: </label><input type="number" #id>
-            <select ng-model="selectedName">{{arrayNames}}</select>
-            <p>Get stations of the Barcelona city: 
-                <button class="btn btn-primary" (click)="getStationsBcn(id.value)">getStations</button>
-            </p>  
-            <!-- <div *ngIf="allFields != undefined" class="card" style="width: 32rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Weather in {{allFields.name}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Description: {{allFields.weather[0].description}}</h6>
-                  <p class="card-text">Latitude: {{allFields.coord.lat}}; Longitude: {{allFields.coord.lon}}</p>
-                  <p class="card-text">Temperature: {{temp}}° C. Max: {{max}}° C / Min {{min}}° C </p>
-                  <p class="card-text">Humidity: {{allFields.main.humidity}} %</p>
-                </div>
-              </div> -->
+            <p class="myPadding">Get the bicing stations of the city of Barcelona:</p>  
+            <label class="margin" for="">Obtain the data of the bicing station if you know its Id: </label>
+            <input  class="margin" type="number" #id min="1" max="508">
+            <button class="btn btn-primary" (click)="getStationsBcn(id.value)">get by Id</button>
+            <br>
+        </div>
+        <div class="col-md-12">
+          <form [formGroup]="contactForm" (ngSubmit)="getByCode()">
+            <label class="margin" for="">Seach the streets of the bicing station by postal code:</label>
+            <select class="margin" formControlName="postalCode">
+              <option [ngValue]="null" disabled>Postal Code</option>
+              <option *ngFor="let c of codes" [ngValue]="c.codigo">{{c.codigo}}</option>
+            </select>
+            <button class="btn btn-primary" type="submit">get by Postal Code</button>
+          </form>  
+        </div>
+        <div class="col-md-12">
+          <div class="stationByCode" *ngIf="(stations$ | async)">
+            <p>These are the bicing stations you have in the selected neighborhood:</p>
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Streets</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let street of arrayCodes">
+                  <th  scope="row">{{street}}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="stationById" *ngIf="(stationById$ | async)">
+            <p>These is the bicing station you have selected added by Id:</p>
+            <div class="card" >
+              <div class="card-body">
+                <h5 class="card-title">Station Id Nº {{this.data.station_id}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{this.data.physical_configuration}}</h6>
+                <p class="card-text">Street: {{this.data.name}}</p>
+                <p class="card-text">Post Code: {{this.data.post_code}}</p>
+              </div>
+            </div>
+          </div>
         </div>
     </div>
 </div>
+
+
+
+
+

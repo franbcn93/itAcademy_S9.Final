@@ -1,0 +1,25 @@
+select {
+  width: 150px;
+}
+
+.stationByCode {
+  font-size: 24px;
+}
+
+.textCenter {
+  text-align: center !important;
+}
+
+@media screen and (min-width: 1000px) {
+  .card {
+    margin: 40px 377px;
+  }
+}
+
+.margin {
+  margin-right: 20px;
+}
+
+.myPadding {
+  padding-top: 40px;
+}
