@@ -11,8 +11,8 @@ select {
 }
 
 @media screen and (min-width: 1000px) {
-  .card {
-    margin: 40px 377px;
+  .container {
+    padding-top: 80px;
   }
 }
 
@@ -22,4 +22,12 @@ select {
 
 .myPadding {
   padding-top: 40px;
+}
+
+p {
+  font-size: 32px;
+}
+
+.myCard {
+  text-align: center;
 }

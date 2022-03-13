@@ -1,14 +1,7 @@
 .center {
   position: absolute;
   top: 40%;
-}
-
-img {
-  width: 200px;
-  height: 250px;
-  position: absolute;
-  top: -30%;
-  margin-left: 10%;
+  text-align: center;
 }
 
 a {
@@ -23,4 +16,22 @@ i {
 }
 i:hover {
   transform: scale(1.1);
+}
+
+@media screen and (max-width: 570px) {
+  .center {
+    padding: 10px;
+  }
+  i {
+    font-size: 0.74em;
+  }
+  a {
+    margin: 8%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  i {
+    font-size: 1.5em;
+  }
 }

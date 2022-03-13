@@ -3,7 +3,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 .child {
   height: 100px;
+}
+ul {
+  padding-right: 8%;
 }

@@ -42,11 +42,9 @@ export class PopSignInComponent implements OnInit {
   @Input() email:string = "";
   @Input() password:string = "";
   
-  // arraySign:SignUp[] = [];
 
   constructor(public activeModal: NgbActiveModal, public afs: AngularFirestore, 
     public SignS: LoginAndSignupService, public appC: AppComponent) {
-      // this.get_users_signUp();
      }
 
   ngOnInit(): void {

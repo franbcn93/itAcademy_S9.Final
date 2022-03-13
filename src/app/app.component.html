@@ -20,19 +20,19 @@
         </ul>
       </div>
     </div>
-    <div class="navbar-collapse">
+    <div class="navbar-collapse myAuth">
       <ul class="navbar-nav ml-auto ">
-        <p class="auth" *ngIf="(isAuth$ | async)">{{this.admin}} Name:{{this.register$.value}}</p>
+        <p class="auth" *ngIf="(isAuth$ | async)">{{this.admin}}: {{this.register$.value}}</p>
         <p class="notAuth" *ngIf="!(isAuth$ | async)">{{this.notAdmin}}</p>
         <li class="nav-item">
-          <button type="button" class="btn btn-link" (click)="login()">LogIn</button>
+          <button type="button" class="btn btn-link nav-button" (click)="login()">LogIn</button>
         </li>
-        <p>//</p>
+        <p class="bar">//</p>
         <li class="nav-item me-5">
-          <button type="button" class="btn btn-link" (click)="register()">Register</button>
+          <button type="button" class="btn btn-link reg nav-button" (click)="register()">Register</button>
         </li>
       </ul>
-  </div>
+    </div>
   </nav>
   <router-outlet></router-outlet>
 </div>

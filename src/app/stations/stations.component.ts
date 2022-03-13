@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } 
 import { StationBicingService } from '../station-bicing.service';
 import { codes } from 'src/PostalCode';
 import { BehaviorSubject } from 'rxjs';
+import { LoginAndSignupService } from '../login-and-signup.service';
 
 
 @Component({
@@ -17,14 +18,17 @@ export class StationsComponent implements OnInit {
   arrayCodes:Array<string>[]=[];
   arrayById:Array<DataById>=[];
   data:DataById;
+  myId:number;
   public stations$ = new BehaviorSubject<boolean>(false);
   public stationById$ = new BehaviorSubject<boolean>(false);
+
+  public isAuth$ = this.loginService.isAuth$;
 
   contactForm: FormGroup;
   codes = codes;
   example: string;
 
-  constructor(private service:StationBicingService, public fb: FormBuilder) {
+  constructor(public loginService: LoginAndSignupService, private service:StationBicingService, public fb: FormBuilder) {
     this.getNamesStations();
    }
 
@@ -82,6 +86,7 @@ export class StationsComponent implements OnInit {
   }
 
   counterCero(){
+    this.myId = 0;
     this.stations$.next(false);
     this.stationById$.next(false);
     this.arrayCodes = [];

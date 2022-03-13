@@ -3,7 +3,7 @@
     <div class="child">
         <p>There are endless ways to greet you...</p>
         <ul>
-            <li *ngFor="let item of items">{{item}}</li>
+            <ol *ngFor="let item of items">{{item}}</ol>
         </ul>
         <app-home-child (newItemEvent)="addItem($event)"></app-home-child>
         <app-weather></app-weather>
