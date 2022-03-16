@@ -60,7 +60,7 @@ export class LoginAndSignupService {
   }
 
   async queryregister(username:string, password:string){ 
-    await this.userDocLogins.get().then((querySnapshot) => { 
+    await this.userDocSigns.get().then((querySnapshot) => { 
       querySnapshot.forEach((doc) => {
            let user = doc.data();
            if(user.username === username){                         
