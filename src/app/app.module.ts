@@ -7,7 +7,6 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { HttpClientModule } from "@angular/common/http";
 import { WeatherComponent } from './weather/weather.component';
-import { RegisterComponent } from './register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PopLoginComponent } from './pop-login/pop-login.component';
 import { PopSignInComponent } from './pop-sign-in/pop-sign-in.component';
@@ -32,7 +31,6 @@ const routes: Routes=[
     HomeComponent,
     ContactComponent,
     WeatherComponent,
-    RegisterComponent,
     PopLoginComponent,
     PopSignInComponent,
     HomeChildComponent,

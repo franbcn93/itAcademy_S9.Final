@@ -1,72 +1,72 @@
 <div class="container">
     <div class="row textCenter">
-        <div class="col-md-12">
-          <!-- <p class="auth" *ngIf="(isAuth$ | async)"> {{this.register$.value}}{{this.isAuth$.value}}</p> -->
-            <p class="myPadding">Get the bicing stations of the city of Barcelona:</p>  
-            <label class="margin" for="">Obtain the data of the bicing station if you know its Id: </label>
-            <input  class="margin" type="number" [(ngModel)]="myId" min="1" max="508">
-            <button class="btn btn-primary" (click)="getStationsBcn(this.myId)">get by Id</button>
-            <br>
-        </div>
-        <br>
+      <div class="col-md-12">
+        <p class="myPadding">Get the bicing stations of the city of Barcelona:</p>  
+      </div>
 
-        <div class="col-md-12">
-          <form [formGroup]="contactForm" (ngSubmit)="getByCode()">
-            <label class="margin" for="">Seach the streets of the bicing station by postal code:</label>
-            <select class="margin" formControlName="postalCode">
-              <option [ngValue]="null" disabled>Postal Code</option>
-              <option *ngFor="let c of codes" [ngValue]="c.codigo">{{c.codigo}}</option>
-            </select>
-            <button class="btn btn-primary" type="submit">get by Postal Code</button>
-            <br>
-          </form>  
+      <div *ngIf="!(isAuth$ | async)" class="card text-white bg-danger mb-3">
+        <div class="card-header">Important</div>
+        <div class="card-body">
+          <h5 class="card-title">Error</h5>
+          <p class="card-text">To view the result, you must be logged in.</p>
+        </div>
+      </div>
+      <br>
+
+      <div class="col-md-12">
+        <label class="margin" for="">Obtain the data of the bicing station if you know its Id: </label>
+        <input  class="margin" type="number" [(ngModel)]="myId" min="1" max="508">
+        <button class="btn btn-primary" (click)="getStationsBcn(this.myId)">get by Id</button>
+        <br><br>
+      </div>
+
+      <div class="col-md-12">
+        <form [formGroup]="contactForm" (ngSubmit)="getByCode()">
+          <label class="margin" for="">Seach the streets of the bicing station by postal code:</label>
+          <select class="margin" formControlName="postalCode">
+            <option [ngValue]="null" disabled>Postal Code</option>
+            <option *ngFor="let c of codes" [ngValue]="c.codigo">{{c.codigo}}</option>
+          </select>
+          <button class="btn btn-primary" type="submit">get by Postal Code</button>
           <br>
-        </div>
-
-        <div *ngIf="(isAuth$ | async)" class="col-md-12">
-          <div class="stationByCode" *ngIf="(stations$ | async)">
-            <br>
-            <p>These are the bicing stations you have in the selected neighborhood:</p>
-            <table class="table table-dark">
-              <thead>
-                <tr>
-                  <th scope="col">Streets</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let street of arrayCodes">
-                  <th  scope="row">{{street}}</th>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
+        </form>  
         <br>
-        <div *ngIf="(isAuth$ | async)" class="col-md-12">
-          <div class="stationById" *ngIf="(stationById$ | async)">
-            <p>These is the bicing station you have selected added by Id:</p>
-            <div class="card" >
-              <div class="card-body">
-                <h5 class="card-title">Station Id Nº {{this.data.station_id}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{this.data.physical_configuration}}</h6>
-                <p class="card-text">Street: {{this.data.name}}</p>
-                <p class="card-text">Post Code: {{this.data.post_code}}</p>
-              </div>
+      </div>
+
+      <div *ngIf="(isAuth$ | async)" class="col-md-12">
+        <div class="stationByCode" *ngIf="(stations$ | async)">
+          <br>
+          <p>These are the bicing stations you have in the selected neighborhood:</p>
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Streets</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let street of arrayCodes">
+                <th  scope="row">{{street}}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <br>
+      <div *ngIf="(isAuth$ | async)" class="col-md-12">
+        <div class="stationById" *ngIf="(stationById$ | async)">
+          <p>These is the bicing station you have selected added by Id:</p>
+          <div class="card" >
+            <div class="card-body">
+              <h5 class="card-title">Station Id Nº {{this.data.station_id}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{this.data.physical_configuration}}</h6>
+              <p class="card-text">Street: {{this.data.name}}</p>
+              <p class="card-text">Post Code: {{this.data.post_code}}</p>
             </div>
           </div>
-          <br>
-        </div>
-
-        <div *ngIf="!(isAuth$ | async)" class="card text-white bg-danger mb-3">
-          <div class="card-header">Important</div>
-          <div class="card-body">
-            <h5 class="card-title">Error</h5>
-            <p class="card-text">To view the result, you must be logged in.</p>
-          </div>
         </div>
         <br>
-
+      </div>    
     </div>
 </div>
 

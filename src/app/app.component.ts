@@ -30,13 +30,11 @@ export class AppComponent {
     
   }
 
-
   login(){
     const modalRef = this.modal.open(PopLoginComponent);
     modalRef.componentInstance.title = 'Log In';
     modalRef.componentInstance.text = "Username or Email Address";
     modalRef.componentInstance.text_2 = "Password";
-
   }
 
   register(){

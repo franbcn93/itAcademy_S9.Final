@@ -73,9 +73,5 @@ export class PopSignInComponent implements OnInit {
       }, 1000);
     }
   }
-
-  // get_users_signUp(){
-  //   this.SignS.getSignUp();
-  // }
 }
 
