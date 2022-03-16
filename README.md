@@ -1,8 +1,8 @@
 # Final
 
-Final project with Angular. In the Readme are the necessary requirements. API with which it consumes resources of the bicing of Barcelona in which you can see information on where its stops are. Of course, you must be logged in to consume the questions.
+**Final project with Angular. In the Readme are the necessary requirements. API with which it consumes resources of the bicing of Barcelona in which you can see information on where its stops are. Of course, you must be logged in to consume the questions.**
 
-Proyecto final con Angular. En el Readme están los requisitos necesarios. API con la que consume recursos del bicing de Barcelona en la que puedes ver información de dónde están sus paradas. Por supuesto, debe iniciar sesión para consumir las preguntas.
+**Proyecto final con Angular. En el Readme están los requisitos necesarios. API con la que consume recursos del bicing de Barcelona en la que puedes ver información de dónde están sus paradas. Por supuesto, debe iniciar sesión para consumir las preguntas.**
 
 Requisits mínims
 
