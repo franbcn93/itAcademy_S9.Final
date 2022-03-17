@@ -4,3 +4,12 @@ label {
 .labelEmail {
   padding-right: 84px;
 }
+
+small {
+  padding-left: 20px;
+}
+
+input {
+  width: 92%;
+  margin: 10px 20px;
+}

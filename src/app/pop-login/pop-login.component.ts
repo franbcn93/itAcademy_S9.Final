@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore} from '@angular/fire/compat/firestore';
 import { LoginAndSignupService } from '../login-and-signup.service';
 import { AppComponent } from '../app.component';
+import { UserData } from '../../user-data';
 
 @Component({
   selector: 'app-pop-login',
@@ -15,15 +16,18 @@ import { AppComponent } from '../app.component';
               </button>
             </div>
             <div class="modal-body">
-              <label for="">Username: </label>
-              <input type="text" placeholder={{text}} (change)="setUsername($event)">
-              <br>
-              <label for="">Password: </label>
-              <input type="text" placeholder={{text_2}} (change)="setPassword($event)">
+              <input class="form-control" type="text" placeholder={{text}} (change)="setUsername($event)">
+              <div>
+                <small class="text-danger">{{nameReq}}</small>
+              </div>
+              <input class="form-control" type="password" placeholder={{text_2}} (change)="setPassword($event)">
+              <div>
+                <small class="text-danger">{{passwordReq}}</small>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-warning" 
-              (click)="activeModal.close('Close click')" (click)="grabar_user_logIn()">Log In</button>
+              (click)="grabar_user_logIn()">Log In</button>
             </div>
           `,
   styleUrls: ['./pop-login.component.css']
@@ -35,10 +39,13 @@ export class PopLoginComponent implements OnInit {
   @Input() text_2: any;
   @Input() username:string = "";
   @Input() password:string = "";
+  passwordReq:string = "Password is required";
+  nameReq:string = "Username is required";
+  count: number = 0;
+  userModel = new UserData('')
   
   constructor(public activeModal: NgbActiveModal, public afs: AngularFirestore, 
     public loginService: LoginAndSignupService, public appC: AppComponent) {
-    // this.get_users(); 
    }
 
   ngOnInit(): void {
@@ -53,12 +60,28 @@ export class PopLoginComponent implements OnInit {
   }
 
   grabar_user_logIn(){
-    this.loginService.queryregister(this.username, this.password);
-    setTimeout(() => { 
-      this.appC.registerName(this.loginService.name);
-      console.log(this.loginService.name);   
-    }, 2500);
-  }  
+    this.fieldEmpty(this.username, this.password);
+    if(this.count === 2){
+      this.loginService.queryregister(this.username, this.password);
+      setTimeout(() => { 
+        this.appC.registerName(this.loginService.name);
+        console.log(this.loginService.name);   
+      }, 2500);
+      this.activeModal.close();      
+    }
+  }
+
+  fieldEmpty(username:string, password:string){
+    this.count = 0;
+    if(this.username !== ""){
+      this.nameReq = "";
+      this.count++;
+    }
+    if(this.password !== ""){
+      this.passwordReq = "";
+      this.count++;
+    }
+  }
 }
 
 

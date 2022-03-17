@@ -1,12 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+import { Component} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject } from 'rxjs';
 import { PopLoginComponent } from './pop-login/pop-login.component';
 import { PopSignInComponent } from './pop-sign-in/pop-sign-in.component';
 import { LoginAndSignupService } from './login-and-signup.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -33,7 +30,7 @@ export class AppComponent {
   login(){
     const modalRef = this.modal.open(PopLoginComponent);
     modalRef.componentInstance.title = 'Log In';
-    modalRef.componentInstance.text = "Username or Email Address";
+    modalRef.componentInstance.text = "Username";
     modalRef.componentInstance.text_2 = "Password";
   }
 
