@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginAndSignupService } from '../login-and-signup.service';
 
 @Component({
   selector: 'app-contact',
@@ -8,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class ContactComponent implements OnInit {
 
 
-  constructor() { 
-    
+  constructor(private service: LoginAndSignupService) { 
+    console.log(service.getIsAuth())
   }
 
   ngOnInit(): void {

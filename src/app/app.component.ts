@@ -4,6 +4,7 @@ import { PopLoginComponent } from './pop-login/pop-login.component';
 import { PopSignInComponent } from './pop-sign-in/pop-sign-in.component';
 import { LoginAndSignupService } from './login-and-signup.service';
 import { FormBuilder } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -18,7 +19,6 @@ export class AppComponent {
   
   constructor(private modal: NgbModal, public loginService: LoginAndSignupService, 
     public fb: FormBuilder) {
-    
   }
   public isAuth$ = this.loginService.isAuth$;
   public register$ = this.loginService.register$;
@@ -42,8 +42,12 @@ export class AppComponent {
     modalRef.componentInstance.text_3 = "Password";
   }
 
-  registerName(nameRegistered:string){
+  registerName(nameRegistered:any){
     this.admin = nameRegistered;
-    console.log(this.admin);
+    console.log(this.admin, this.loginService.getName);
+  }
+
+  isReg(){
+    console.log(this.loginService.getName());
   }
 }

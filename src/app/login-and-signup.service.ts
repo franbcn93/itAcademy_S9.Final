@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore} from '@angular/fire/compat/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -12,25 +12,29 @@ export class LoginAndSignupService {
   userDocLogins = this.afs.firestore.collection("logins");
   registered:boolean = false;
   name: string = "";
-  public isAuth$ = new BehaviorSubject<boolean>(false);
-  public register$ = new BehaviorSubject<string>("");
+  public isAuth$:BehaviorSubject<boolean>;
+  public register$:BehaviorSubject<string>;
+  emailN: string;
+  
 
-  constructor(public afs: AngularFirestore) { }
+  constructor(public afs: AngularFirestore) {
+    this.isAuth$ = new BehaviorSubject<boolean>(false);
+    this.register$ = new BehaviorSubject<string>("");
+   }
 
-  getLogin(){
-    let userDoc = this.afs.firestore.collection("logins");
-    userDoc.get().then((querySnapshot) => { 
+   async getLogin(){
+    await this.userDocLogins.get().then((querySnapshot) => { 
       querySnapshot.forEach((doc) => {
            console.log(doc.id, "=>", doc.data(), doc.data().username);
       })
    })
   }
 
-  async register(username:string, email:string, password:string){
+  async register(email:string, password:string, confirmPassword:string){
     await this.userDocSigns.get().then((querySnapshot) => { 
       querySnapshot.forEach((doc) => {
            let user = doc.data();
-           if(user.username === username && user.email === email){  
+           if(user.email === email && user.password === password){  
               this.registered = true;          
               return;
            }          
@@ -40,67 +44,78 @@ export class LoginAndSignupService {
 
     setTimeout(() => {
       if(!this.registered){
-        let newSignUp:SignUp;
-        newSignUp={username: username, email:email, password:password}
-        this.afs.collection("signs").add(newSignUp);
-        this.registerName(username);
-        alert("\n Name: " + username + "\n Email: " + email + "\n You have registered successfully. Thanks");
+        if(password != confirmPassword){
+          alert("Two passwords are not equals")
+        }else{
+          let newSignUp:SignUp;
+          newSignUp={email: email, password:password, confirmPassword:confirmPassword}
+          this.afs.collection("signs").add(newSignUp);
+          this.registerName(email);
+          alert("\n Email: " + email + "\n Password: " + password + "\n You have registered successfully. Thanks");
+        }
       }
       else{
-        alert("User " + username + " is registered yet.")
+        alert("Email " + email + " is registered yet.")
       }
       this.registered = false;
     }, 1000);
   }
 
-  registerName(username:string){
-    this.name = username;
+  registerName(email:string){
+    this.name = email;
     this.isAuth$.next(true);
-    this.register$.next(username);
+    this.register$.next(email);
+    this.emailN = email;
   }
 
-  async queryregister(username:string, password:string){ 
+  async queryregister(email:string, password:string){ 
     await this.userDocSigns.get().then((querySnapshot) => { 
       querySnapshot.forEach((doc) => {
            let user = doc.data();
-           if(user.username === username){                         
+           console.log(doc.id, "=>", doc.data(), user.email);
+           if(user.email === email){                         
               this.registered = true;          
               return;
            }          
-           console.log(doc.id, "=>", doc.data(), this.registered);
         })
     })
   
     setTimeout(() => {
       if(this.registered){
         let newLogIn:LogIn;
-        newLogIn={username: username, password:password}
+        newLogIn={email: email, password:password}
         this.afs.collection("logins").add(newLogIn);
-        this.registerName(username);
-        alert("\n Name: " + username + "\n You have successfully logged in. Thanks");
+        this.registerName(email);
+        alert("\n Email: " + email + "\n You have successfully logged in. Thanks");
       }
       else{
-        alert("User " +username + " is not registered in our database.")
+        alert("User " + email + " is not registered in our database.")
       }
       this.registered = false;
     }, 1000);
   }
 
   getName(){
-    setTimeout(() => { 
-      return this.name;    
-    }, 1200);
+      return this.emailN;       
   }
+
+  getIsAuth(){
+    setTimeout(() => { 
+      return this.isAuth$;    
+    }, 1200);   
+  }
+
+  
 }
 
 
 interface SignUp{
-  username:string;
   email:string;
   password:string;
+  confirmPassword:string;
 }
 
 interface LogIn{
-  username:string;
+  email:string;
   password:string;
 }

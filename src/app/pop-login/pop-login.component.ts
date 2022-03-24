@@ -16,18 +16,26 @@ import { UserData } from '../../user-data';
               </button>
             </div>
             <div class="modal-body">
-              <input class="form-control" type="text" placeholder={{text}} (change)="setUsername($event)">
-              <div>
-                <small class="text-danger">{{nameReq}}</small>
-              </div>
-              <input class="form-control" type="password" placeholder={{text_2}} (change)="setPassword($event)">
-              <div>
-                <small class="text-danger">{{passwordReq}}</small>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-warning" 
-              (click)="grabar_user_logIn()">Log In</button>
+              <form class="custom-form" method="post">
+                <input
+                  type="email"
+                  [(ngModel)]="email"
+                  name="email"
+                  placeholder="Email"
+                  required="required"
+                />
+                <input
+                  type="password"
+                  [(ngModel)]="password"
+                  name="password"
+                  placeholder="Password"
+                  required="required"
+                />
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-warning" 
+                  (click)="grabar_user_logIn()">Log In</button>
+                </div>
+              </form>
             </div>
           `,
   styleUrls: ['./pop-login.component.css']
@@ -37,8 +45,10 @@ export class PopLoginComponent implements OnInit {
   @Input() title: any;
   @Input() text: any;
   @Input() text_2: any;
-  @Input() username:string = "";
-  @Input() password:string = "";
+  email: string;
+  password: string;
+  // @Input() username:string = "";
+  // @Input() password:string = "";
   passwordReq:string = "Password is required";
   nameReq:string = "Username is required";
   count: number = 0;
@@ -51,21 +61,21 @@ export class PopLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setUsername(event:any){
-    this.username = event.target.value;
-  } 
+  // setUsername(event:any){
+  //   this.username = event.target.value;
+  // } 
 
-  setPassword(event:any){
-    this.password = event.target.value;
-  }
+  // setPassword(event:any){
+  //   this.password = event.target.value;
+  // }
 
   grabar_user_logIn(){
-    this.fieldEmpty(this.username, this.password);
+    this.fieldEmpty(this.email, this.password);
     if(this.count === 2){
-      this.loginService.queryregister(this.username, this.password);
+      this.loginService.queryregister(this.email, this.password);
       setTimeout(() => { 
-        this.appC.registerName(this.loginService.name);
-        console.log(this.loginService.name);   
+        this.appC.registerName(this.loginService.register$);
+        console.log(this.loginService.name, this.loginService.register$);   
       }, 2500);
       this.activeModal.close();      
     }
@@ -73,7 +83,7 @@ export class PopLoginComponent implements OnInit {
 
   fieldEmpty(username:string, password:string){
     this.count = 0;
-    if(this.username !== ""){
+    if(this.email !== ""){
       this.nameReq = "";
       this.count++;
     }

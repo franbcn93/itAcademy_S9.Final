@@ -18,7 +18,7 @@ export class StationsComponent implements OnInit {
   arrayCodes:Array<string>[]=[];
   arrayById:Array<DataById>=[];
   data:DataById;
-  myId:number;
+  myId:number=1;
   public stations$ = new BehaviorSubject<boolean>(false);
   public stationById$ = new BehaviorSubject<boolean>(false);
 
@@ -27,6 +27,7 @@ export class StationsComponent implements OnInit {
   contactForm: FormGroup;
   codes = codes;
   example: string;
+  result:any;
 
   constructor(public loginService: LoginAndSignupService, private service:StationBicingService, public fb: FormBuilder) {
     this.getNamesStations();
@@ -67,6 +68,7 @@ export class StationsComponent implements OnInit {
   }
 
   getStationsBcn(id:any){
+    this.result=this.loginService.getName();
     this.counterCero();
     this.service.getStations()
     .subscribe(all =>{
