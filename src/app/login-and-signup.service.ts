@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore} from '@angular/fire/compat/firestore';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -8,8 +8,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class LoginAndSignupService {
 
-  userDocSigns = this.afs.firestore.collection("signs");
-  userDocLogins = this.afs.firestore.collection("logins");
+  userSigns = this.afs.firestore.collection("signs");
+  userLogs = this.afs.firestore.collection("logins");
   registered:boolean = false;
   name: string = "";
   public isAuth$:BehaviorSubject<boolean>;
@@ -23,16 +23,16 @@ export class LoginAndSignupService {
    }
 
    async getLogin(){
-    await this.userDocLogins.get().then((querySnapshot) => { 
-      querySnapshot.forEach((doc) => {
+    await this.userLogs.get().then((query) => { 
+      query.forEach((doc) => {
            console.log(doc.id, "=>", doc.data(), doc.data().username);
       })
    })
   }
 
   async register(email:string, password:string, confirmPassword:string){
-    await this.userDocSigns.get().then((querySnapshot) => { 
-      querySnapshot.forEach((doc) => {
+    await this.userSigns.get().then((query) => { 
+      query.forEach((doc) => {
            let user = doc.data();
            if(user.email === email && user.password === password){  
               this.registered = true;          
@@ -51,7 +51,7 @@ export class LoginAndSignupService {
           newSignUp={email: email, password:password, confirmPassword:confirmPassword}
           this.afs.collection("signs").add(newSignUp);
           this.registerName(email);
-          alert("\n Email: " + email + "\n Password: " + password + "\n You have registered successfully. Thanks");
+          // alert("\n Email: " + email + "\n Password: " + password + "\n You have registered successfully. Thanks");
         }
       }
       else{
@@ -69,8 +69,8 @@ export class LoginAndSignupService {
   }
 
   async queryregister(email:string, password:string){ 
-    await this.userDocSigns.get().then((querySnapshot) => { 
-      querySnapshot.forEach((doc) => {
+    await this.userSigns.get().then((query) => { 
+      query.forEach((doc) => {
            let user = doc.data();
            console.log(doc.id, "=>", doc.data(), user.email);
            if(user.email === email){                         
@@ -86,10 +86,6 @@ export class LoginAndSignupService {
         newLogIn={email: email, password:password}
         this.afs.collection("logins").add(newLogIn);
         this.registerName(email);
-        alert("\n Email: " + email + "\n You have successfully logged in. Thanks");
-      }
-      else{
-        alert("User " + email + " is not registered in our database.")
       }
       this.registered = false;
     }, 1000);

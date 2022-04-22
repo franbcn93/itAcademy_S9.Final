@@ -17,12 +17,16 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { HomeChildComponent } from './home-child/home-child.component';
 import { StationsComponent } from './stations/stations.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LogInComponent } from './log-in/log-in.component';
+import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes=[
   {path: '', component:HomeComponent},
   {path: 'stations', component:StationsComponent},
   {path: 'contact', component:ContactComponent},
+  {path: 'login', component:LogInComponent},
+  {path: 'register', component:RegisterComponent}, 
 ];
 
 @NgModule({
@@ -34,7 +38,9 @@ const routes: Routes=[
     PopLoginComponent,
     PopSignInComponent,
     HomeChildComponent,
-    StationsComponent
+    StationsComponent,
+    LogInComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

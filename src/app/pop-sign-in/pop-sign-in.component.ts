@@ -74,18 +74,6 @@ export class PopSignInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // setUsername(event:any){
-  //   this.username = event.target.value;
-  // } 
-  
-  // setEmail(event:any){
-  //   this.email = event.target.value;
-  // }
-
-  // setPassword(event:any){
-  //   this.password = event.target.value;
-  // }
-
   grabar_user_signUp(){ 
     this.fieldEmpty(this.email, this.password, this.confirmPassword);
     if(this.count === 3){
@@ -93,7 +81,7 @@ export class PopSignInComponent implements OnInit {
       setTimeout(() => { 
         // this.appC.registerName(this.SignS.name);
         this.appC.registerName(this.email);
-        console.log(this.SignS.name);   
+        // console.log(this.SignS.name);   
       }, 1000);
       this.activeModal.close();      
     } 
@@ -109,22 +97,7 @@ export class PopSignInComponent implements OnInit {
     }
     if(confirmPassword !== ""){
       this.count++;
-    }
-    // if(this.username !== ""){
-    //   this.nameReq = "";
-    //   this.count++;
-    // }
-    // if(this.email !== ""){
-    //   this.count++;
-    // }
-    // if(this.password !== ""){
-    //   this.passwordReq = "";
-    //   this.count++;
-    // }
+    }  
   }
-  // login() {
-  //   console.log(this.email2);
-  //   console.log(this.password2);
-  // }
 }
 

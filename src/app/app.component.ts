@@ -4,8 +4,6 @@ import { PopLoginComponent } from './pop-login/pop-login.component';
 import { PopSignInComponent } from './pop-sign-in/pop-sign-in.component';
 import { LoginAndSignupService } from './login-and-signup.service';
 import { FormBuilder } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
-
 
 @Component({
   selector: 'app-root',
@@ -15,7 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AppComponent {
   title = 'final';
   admin: string = "Admin";
-  notAdmin: string = "Not_Admin"
+  notAdmin: string = "Create account"
   
   constructor(private modal: NgbModal, public loginService: LoginAndSignupService, 
     public fb: FormBuilder) {
