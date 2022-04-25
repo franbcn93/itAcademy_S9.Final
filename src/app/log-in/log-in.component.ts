@@ -13,6 +13,8 @@ export class LogInComponent implements OnInit {
   password: string = "";
   count: number = 0;
   log: string = "👉 Log In";
+  chColor: boolean = false;
+  showPassword: boolean = false;
 
   constructor(public afs: AngularFirestore, 
     public loginService: LoginAndSignupService) { }
@@ -21,30 +23,30 @@ export class LogInComponent implements OnInit {
   }
 
   login() {
+    this.chColor = false;
     this.fieldEmpty(this.email, this.password);
-    if(this.count === 2){
+    if(this.count === 1){
       this.loginService.queryregister(this.email, this.password);
       setTimeout(() => { 
         if(this.loginService.registered === true){
           this.log = "You have logged correctly 👍" 
         }
         else{
-          this.log = "User " + this.email + " is not registered in our database. 🤷‍♀️"
+          this.chColor = true;
+          this.log = "User " + this.email + " is not registered in our database " +
+          " or password are not correct. 🤷‍♀️"
         }
-        console.log( this.loginService.registered)
-        // this.appC.registerName(this.loginService.register$);
-        // console.log(this.loginService.name, this.loginService.register$);   
       }, 500);
-      this.delete();
+    }else{
+      this.chColor = true;
+      this.log = "Fields cannot be empty 😥"
     }
+    this.delete();
   }
 
   fieldEmpty(username:string, password:string){
     this.count = 0;
-    if(this.email !== ""){
-      this.count++;
-    }
-    if(this.password !== ""){
+    if(this.email !== "" && this.password !== ""){
       this.count++;
     }
   } 

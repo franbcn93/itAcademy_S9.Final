@@ -1,5 +1,5 @@
 <div class="login">
-    <h2>{{log}}</h2>
+    <h2 [ngStyle]="{'color': chColor === true ? 'red' : 'black'}">{{log}}</h2>
     <form class="custom-form" method="post">
       <h1>Login</h1>
       <input

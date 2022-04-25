@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   confirmPassword: string = "";
   count: number = 0;
   registered: string = "👉 Register";
+  chColor: boolean = false;
 
   constructor( public loginService: LoginAndSignupService) {
     
@@ -22,13 +23,22 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.chColor = false;
     this.fieldEmpty(this.email, this.password, this.confirmPassword);
     if(this.count === 3){
       this.loginService.register(this.email, this.password, this.confirmPassword);
-      setTimeout(() => { 
-        this.registered = "Thanks 👌"        
+      setTimeout(() => {
+        // Comprobem si ja està registrat l'usuari
+        if(this.loginService.registered === true){
+          this.chColor = true;
+          this.registered = "An error occurred. That email and password is already registered 😵"
+        } 
+        // En cas contrari...
+        else{
+          this.registered = "You have registered correctly 👌"        
+        }
       }, 500);
-      this.registered = "You have registered correctly 👍"
+      this.registered = "Registering... 👍"
     }
     this.delete();
   }

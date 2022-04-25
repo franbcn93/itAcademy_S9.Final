@@ -1,7 +1,5 @@
 import { Component} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { PopLoginComponent } from './pop-login/pop-login.component';
-import { PopSignInComponent } from './pop-sign-in/pop-sign-in.component';
 import { LoginAndSignupService } from './login-and-signup.service';
 import { FormBuilder } from '@angular/forms';
 
@@ -25,20 +23,6 @@ export class AppComponent {
     
   }
 
-  login(){
-    const modalRef = this.modal.open(PopLoginComponent);
-    modalRef.componentInstance.title = 'Log In';
-    modalRef.componentInstance.text = "Username";
-    modalRef.componentInstance.text_2 = "Password";
-  }
-
-  register(){
-    const modalRef = this.modal.open(PopSignInComponent);
-    modalRef.componentInstance.title = 'Sign Up';
-    modalRef.componentInstance.text = "Username";
-    modalRef.componentInstance.text_2 = "Email Address";
-    modalRef.componentInstance.text_3 = "Password";
-  }
 
   registerName(nameRegistered:any){
     this.admin = nameRegistered;

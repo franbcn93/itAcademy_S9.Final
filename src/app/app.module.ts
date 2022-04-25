@@ -8,8 +8,6 @@ import { ContactComponent } from './contact/contact.component';
 import { HttpClientModule } from "@angular/common/http";
 import { WeatherComponent } from './weather/weather.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PopLoginComponent } from './pop-login/pop-login.component';
-import { PopSignInComponent } from './pop-sign-in/pop-sign-in.component';
 import { environment } from 'src/environments/environment';
 
 import { AngularFireModule } from '@angular/fire/compat';
@@ -35,8 +33,6 @@ const routes: Routes=[
     HomeComponent,
     ContactComponent,
     WeatherComponent,
-    PopLoginComponent,
-    PopSignInComponent,
     HomeChildComponent,
     StationsComponent,
     LogInComponent,

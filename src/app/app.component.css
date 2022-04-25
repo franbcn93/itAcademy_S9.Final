@@ -17,59 +17,10 @@ img{
   margin: -16px -10px -16px -20px;
 }
 
-/* .notAuth {
-  color: red;
-} */
-
 a{
   text-decoration: none;
 }
 
-/* .navbar-brand,
-.btn-link {
-  font-size: 30px !important;
+.reg{
+  margin-right: 10px;
 }
-
-
-.notAuth {
-  margin: 10px 30px;
-}
-
-
-@media screen and (min-width: 1000px) {
-  .active {
-    padding: 0 30px !important;
-  }
-  ul {
-    margin-left: -80px;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  ul {
-    text-align: center;
-  }
-  .myAuth {
-    padding-left: 23px;
-  }
-  nav > ul {
-    display: inline-block;
-  }
-  .bar {
-    display: none;
-  }
-  .notAuth,
-  .auth,
-  .nav-button {
-    margin: -10px;
-  }
-  .reg {
-    margin-left: 7%;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .reg {
-    margin-left: 15%;
-  }
-} */

@@ -51,7 +51,6 @@ export class LoginAndSignupService {
           newSignUp={email: email, password:password, confirmPassword:confirmPassword}
           this.afs.collection("signs").add(newSignUp);
           this.registerName(email);
-          // alert("\n Email: " + email + "\n Password: " + password + "\n You have registered successfully. Thanks");
         }
       }
       else{
@@ -73,7 +72,7 @@ export class LoginAndSignupService {
       query.forEach((doc) => {
            let user = doc.data();
            console.log(doc.id, "=>", doc.data(), user.email);
-           if(user.email === email){                         
+           if(user.email === email && user.password === password){                         
               this.registered = true;          
               return;
            }          
